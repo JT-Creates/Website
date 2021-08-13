@@ -1,0 +1,16 @@
+Math chars
+º
+¼
+½
+¾
+¹
+²
+³
+
+Math symbols
+±
+´
+°
+
+Math Letters
+ª
