@@ -1,0 +1,55 @@
+@media screen and (max-width: 300px) {
+    .sum, .inf {
+        margin-bottom: .2em;
+        font-size: .9em;
+    }
+    #rightPane {
+        display: none;
+    }
+    #pt {
+        display: none;
+    }
+    nav {
+        grid-template-columns: 100%;
+        grid-template-rows: repeat(1fr);
+        grid-template-areas:
+            "tab0""tab1""tab2""tab3""tab4""tab5";
+    }
+}
+
+@media screen and (max-width: 590px) {
+    .sum, .inf {
+        margin-bottom: .2em;
+        font-size: .9em;
+    }
+    #rightPane {
+        display: none;
+    }
+    nav {
+        grid-template-columns: 100%;
+        grid-template-rows: repeat(1fr);
+        grid-template-areas:
+            "tab0""tab1""tab2""tab3""tab4""tab5";
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .card {
+        grid-template-columns: auto 1fr;
+        grid-template-areas:
+            "name summery"
+            "description description"
+    }
+    .cat, .id, #rightPane {
+        display: none;
+    }
+    #nio {
+        display: block;
+    }
+    nav {
+        grid-template-columns: 100%;
+        grid-template-rows: repeat(1fr);
+        grid-template-areas:
+            "tab0""tab1""tab2""tab3""tab4""tab5";
+    }
+}

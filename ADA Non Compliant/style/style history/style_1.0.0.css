@@ -1,0 +1,84 @@
+img {
+    width: 100%;
+    display: block;
+}
+html, body {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    line-height: 1.5em;
+}
+a {
+    color: #008061;
+    text-decoration: none;
+}
+#page {
+    overflow-y: scroll;
+    font: 1em;
+    background: #fff;
+}
+#main {
+    height: auto;
+}
+footer {
+    bottom: -1em;
+    font: 1vw;
+    padding: 1em;
+    left: -1;
+    right: -1;
+    background: #ccc;
+    position: relative;
+}
+#nav {
+    text-align: left;
+    padding: 1px;
+    background: red;
+    height: auto;
+    display: flex;
+}
+.rightpane {
+    text-align: left;
+    vertical-align: top;
+    margin: 1em;
+    width: 30%;
+    display: inline-block;
+}
+li {
+    vertical-align: top;
+    list-style: none;
+}
+#ni, #nio {
+    margin: 1px;
+    background: #fff;
+    text-align: center;
+    height: 22px;
+    width: auto;
+    display: inline-block;
+}
+#ni:hover {
+    color: #ff8fae;
+    cursor: pointer;
+    background: #000;
+}
+#nio {
+    width: 100%;
+    display: none;
+}
+#backplane {
+    box-shadow: 1px -3px 5px rgba(0,0,2,2);
+    -khtml-box-shadow: 1px -3px 5px rgba(0,0,2,2);
+    -moz-box-shadow: 1px -3px 5px rgba(0,0,2,2);
+    -webkit-box-shadow: 1px -3px 5px rgba(0,0,2,2);
+    display: inline-block;
+    background: gray;
+    margin: 1em;
+}
+#partname {
+    margin: -5px;
+    padding: 2px;
+    text-align: center;
+    background: #ccc;
+}
+#img {
+    width: 280px;
+}

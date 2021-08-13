@@ -1,0 +1,8 @@
+ul {
+list-style: none;
+padding-left: 4pt;
+}
+
+.left_pane, .right_pane {
+display: inline-block;
+}

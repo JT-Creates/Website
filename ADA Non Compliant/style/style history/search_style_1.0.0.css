@@ -1,0 +1,39 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+input, select {
+    border-radius: 0;
+    height: 2em;
+}
+td:hover, td, table {
+    background: transparent;
+    border: 0;
+    padding: .2em;
+}
+.card {
+    font: 1em;
+    margin: .8em;
+    display: grid;
+    grid-template-columns: auto 8fr 2em 16%;
+    grid-column-gap: 0;
+    grid-template-areas:
+        "name summery . catagory"
+        "description description . id"
+}
+.nam {
+    grid-area: name;
+}
+.sum {
+    grid-area: summery;
+}
+.inf {
+    grid-area: description;
+    font: .8em;
+}
+.cat {
+    grid-area: catagory;
+}
+.id {
+    grid-area: id;
+}

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="./style/main.css"/> 
+<title>2020's Genaric Website</title>
+<script type="text/javascript" src="./js/jquery.js"></script>
+<script type="text/javascript" src="./js/mat_module_lib.js"></script>
+<script type="text/javascript" src="./js/mat_graph_lib.js"></script>
+<script type="text/javascript" src="./js/math.js"></script>
+<script type="text/javascript" src="./js/javascript.js"></script>
+<script type="text/javascript">
+var obj = draw, real_Height, s_Height, cycle = 0;
+function startInterval(){
+ setTimeout(function(){
+  s_Height = elById("main_container").clientHeight;
+  if(real_Height < s_Height - 1 || real_Height > s_Height + 1) Document.getElementById("carrot").style.height = Document.getElementById("ei").clientWidth/2;
+  real_Height = elById("main_container").clientHeight;
+  startInterval(); // Repeat function
+  if (cycle > 1024) {
+    test(1);
+    cycle = 0;
+  }
+  cycle++;
+ }, .1401);
+}
+</script>
+</head> 
+<body onload="start()">
+<div id="main_container">
+<div id="Top_panel">
+<div id="Logo_top">
+<img width="671" height="172" style="height:4em; object-fit:contain;" src="thumbs/JTS PC REPAIRS.png"></img>
+</div>
+<nav id="Nav_top">
+<a class="level-1" href="./index.html">Home</a>
+<a class="level-1" href="" id="program_button" onclick="document.getElementById('expand_Programs').style.display = 'grid';" onmouseover="document.getElementById('expand_Programs').style.display = 'grid';">Programs</a>
+<div id="expand_Programs" onmouseout="document.getElementById('expand_Programs').style.display = 'none';" onmouseover="document.getElementById('expand_Programs').style.display = 'grid';">
+<div style="grid-area:hed0;">
+<li><span class="level-2">Deleware County Community College Programs</span></li>
+<li><a style="grid-area:tab;" class="level-2" aria-label="Deleware County Community College Programs Java" href="programs/DCCC_edu/java">Java</a></li>
+<li><a style="grid-area:tab;" class="level-2" aria-label="Deleware County Community College Programs C plus plus" href="programs/DCCC_edu/CPP">C++</a></li>
+</div>
+<div style="grid-area:hed1; width: 10pt;"></div>
+<div style="grid-area:hed3;">
+<li><span class="level-2">Independent Projects</span></li>
+<li><a style="grid-area:tab;" class="level-2" aria-label="Independent Projects Java" href="programs/my_code/java">Java</a></li>
+<li><a style="grid-area:tab;" class="level-2" aria-label="Independent Projects H T M L" href="programs/my_code/HTML">HTML</a></li>
+<li><a style="grid-area:tab;" class="level-2" aria-label="Independent Projects C plus plus" href="programs/my_code/CPP">C++</a></li>
+<li><a style="grid-area:tab;" class="level-2" aria-label="Independent Projects Python" href="programs/my_code/Python">Python</a></li>
+<li><a style="grid-area:tab;" class="level-2" aria-label="Independent Projects Visual Basic Scripts" href="programs/my_code/VBS">Visual Basic Script</a></li>
+</div>
+</div>
+<a class="level-1" href="about">About</a>
+</nav>
+</div>
+<div id="contents">
+<div id="entrance_image">
+<div id="carrot">
+	<img id="ei" src="thumbs/i (1).jpg" aria-label="JTS PC REPAIRS">
+	<img id="ei" src="thumbs/i (2).jpg" aria-label="JTS PC REPAIRS">
+	<img id="ei" src="thumbs/i (3).jpg" aria-label="JTS PC REPAIRS">
+	<img id="ei" src="thumbs/i (4).jpg" aria-label="JTS PC REPAIRS">
+	<img id="ei" src="thumbs/i (6).jpg" aria-label="JTS PC REPAIRS">
+	<img id="ei" src="thumbs/i (7).jpg" aria-label="JTS PC REPAIRS">
+	<img id="ei" src="thumbs/i (8).jpg" aria-label="JTS PC REPAIRS">
+	<img id="ei" src="thumbs/i (9).jpg" aria-label="JTS PC REPAIRS">
+	<img id="ei" src="thumbs/i (10).jpg" aria-label="JTS PC REPAIRS">
+</div>
+</div>
+<div><h2>Component library</h2>
+<br>
+
+  <div id="backplane">
+    <b><p id="partname">Transformer</p></b><br>
+    <a href="./led"> <img id="thumb" width="300" height="120" src="thumbs/i (1).jpg" aria-label="Untitled"></a>
+  </div>
+  <div id="backplane">
+    <b><p id="partname">Batteries</p></b><br>
+    <a href="./Batteries"> <img id="thumb" width="300" height="120" src="thumbs/i (2).jpg" aria-label="Untitled"></a>
+  </div>
+  <div id="backplane">
+    <b><p id="partname">capacitors</p></b><br>
+    <a href="./transistor basics"> <img id="thumb" width="300" height="120" src="thumbs/i (3).jpg" aria-label="Untitled"></a>
+  </div>
+  <div id="backplane">
+    <b><p id="partname">Diodes</p></b><br>
+    <a href="./transformers"> <img id="thumb" width="300" height="120" src="thumbs/i (4).jpg" aria-label="Untitled"></a>
+  </div>
+  <div id="backplane">
+    <b><p id="partname">DIP transistor</p></b><br>
+    <a href="./diodes"> <img id="thumb" width="300" height="120" src="thumbs/i (6).jpg" aria-label="Untitled"></a>
+  </div>
+  <div id="backplane">
+    <b><p id="partname">SMD transistor</p></b><br>
+    <a href="./capacitor"> <img id="thumb" width="300" height="120" src="thumbs/i (7).jpg" aria-label="Untitled"></a>
+  </div>
+  <div id="backplane">
+    <b><p id="partname">LED</p></b><br>
+    <a href="./pcb"> <img id="thumb" width="300" height="120" src="thumbs/i (8).jpg" aria-label="Untitled"></a>
+  </div>
+  <div id="backplane">
+    <b><p id="partname">PCB</p></b><br>
+    <a href="./resistor"> <img id="thumb" width="300" height="120" src="thumbs/i (9).jpg" aria-label="Untitled"></a>
+  </div>
+  <div id="backplane">
+    <b><p id="partname">resistor</p></b><br>
+    <a href="./resistor"> <img id="thumb" width="300" height="120" src="thumbs/i (10).jpg" aria-label="Untitled"></a>
+  </div></div>
+</div>
+</div>
+</body>
+</html>
