@@ -154,10 +154,18 @@ display: inline;
 // ============ Navigation ============
 
 #Logo_top {
- grid-area: Logo_top;
+ grid-area: logo_top;
 }
-#Nav_top {
- grid-area: Navagation_top;
+
+#Info_top {
+ grid-area: inf_top
+}
+
+#Social_top {
+ grid-area: social_top
+}
+#Navagation_top {
+ grid-area: nav_top;
  display: grid;
  margin-top: 10px;
  margin-bottom: 10px;
@@ -167,6 +175,7 @@ display: inline;
  grid-template-areas:
   "tab0 tab1 tab2 tab3 tab4 tab5";
 }
+
 #Top_panel {
  grid-area: Top_bar;
  display: grid;
@@ -176,10 +185,8 @@ display: inline;
  grid-template-rows: repeat(1em);
  grid-gap: 0;
  grid-template-areas: 
- "Logo_top Info_top Social_to Menu_IO"
- "Logo_top Navagation_top Navagation_top Navagation_top";
-}
-#Social_Top {
+ "logo_top inf_top social_top menu_io"
+ "logo_top nav_top nav_top nav_top";
 }
 
 #expand_Programs {
