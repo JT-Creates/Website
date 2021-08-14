@@ -8,19 +8,15 @@
 <script type="text/javascript" src="./js/mat_graph_lib.js"></script>
 <script type="text/javascript" src="./js/math.js"></script>
 <script type="text/javascript">
-var obj = draw, real_Height, s_Height, cycle = 0;
-function startInterval(){
- setTimeout(function(){
-  s_Height = elById("main_container").clientHeight;
-  if(real_Height < s_Height - 1 || real_Height > s_Height + 1) Document.getElementById("carrot").style.height = Document.getElementById("ei").clientWidth/2;
-  real_Height = elById("main_container").clientHeight;
-  startInterval(); // Repeat function
-  if (cycle > 1024) {
-    test(1);
-    cycle = 0;
-  }
-  cycle++;
- }, .1401);
+var obj = draw, real_Height, s_Height, cevents = [32], cactions = ["Change_Slide(1)"];
+var dynamic  = "s_Height = elById('main_container').clientHeight;";
+    dynamic += "if(real_Height < s_Height - 1 || real_Height > s_Height + 1) Document.getElementById(\"carrot\").style.height = Document.getElementById(\"ei\").clientWidth/2;";
+    dynamic += "real_Height = elById(\"main_container\").clientHeight;";
+
+function start() {
+startInterval()
+Slideshow();
+//changer('nav_menu_io','open','close','<img class=\'icon\' src=\'thumbs/i (5).jpg\'>','<img class=\'icon\' src=\'thumbs/i (11).jpg\'>','document.getElementById(\'Nav_top\').style.display=\'block\'','document.getElementById(\'Nav_top\').style.display=\'none\'');
 }
 </script>
 </head> 
@@ -30,9 +26,10 @@ function startInterval(){
 <div id="Logo_top">
 <img width="671" height="172" style="height:4em; object-fit:contain;" src="thumbs/JTS PC REPAIRS.png"></img>
 </div>
+<!--
+<button class="icon" style="grid-area: Menu_IO" id="nav_menu_io" onclick="changer('nav_menu_io','open','close','<img class=\'icon\' src=\'thumbs/i (5).jpg\'>','<img class=\'icon\' src=\'thumbs/i (11).jpg\'>','document.getElementById(\'Nav_top\').style.display=\'inline-block\'','document.getElementById(\'Nav_top\').style.display=\'none\'');"></button>
+-->
 <nav id="Nav_top">
-<button class="level-1" id="nav_menu_io" onclick="changer('open','close','<img class=&quot;icon&quot; src=&quot;thumbs/i (5).jpg&quot;>','<img class=&quot;icon&quot; src=&quot;thumbs/i (11).jpg&quot;>','document.getElementById(&quot;menu_items&quot;).style.display=&quot;block&quot;','document.getElementById(&quot;menu_items&quot;).style.display=&quot;none&quot;');"></button
-<div id="menu_items">
 <button class="level-1" onclick="document.location.href='./index.html'">Home</button>
 <button class="level-1" id="program_button" onclick="document.getElementById('expand_Programs').style.display = 'grid';" onmouseover="document.getElementById('expand_Programs').style.display = 'grid';">Programs</button>
 <div id="expand_Programs" onmouseout="document.getElementById('expand_Programs').style.display = 'none';" onmouseover="document.getElementById('expand_Programs').style.display = 'grid';">
@@ -52,7 +49,6 @@ function startInterval(){
 </div>
 </div>
 <button class="level-1" onclick="document.location.href='about'">About</button>
-</div>
 </nav>
 </div>
 <div id="contents">
@@ -69,8 +65,8 @@ function startInterval(){
 	<img id="ei" src="thumbs/i (10).jpg" alt="" aria-label="photo depicting Resistorers">
 </div>
 <div>
-<button onclick="test(-1)">Previous</button>
-<button onclick="test(1);">Next</button>
+<button onclick="Change_Slide(-1)">Previous</button>
+<button onclick="Change_Slide(1);">Next</button>
 </div>
 </div>
 

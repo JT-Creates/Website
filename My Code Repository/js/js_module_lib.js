@@ -19,6 +19,24 @@ function eventhandle(){
  }
 }
 
+// ===== Events =====
+var cycle = 0;
+function startInterval(){
+ setTimeout(function(){
+  eval(dynamic);
+  for(var c = 0; c < cevents.length; c++){
+   if (cycle > cevents[c]) {
+    eval(cactions[c]);
+    if (cycle > cevents[cevents.length-1]) {
+     cycle = 0;
+    }
+   }
+  }
+  cycle++;
+  startInterval(); // Repeat function
+ }, .1401);
+}
+
 // ==== Elements ====
 
 function elementsadd(){
@@ -35,7 +53,8 @@ function elementsadd(){
  elol.innerHTML = itms;
 }
 
-function changer(text1,text2,data1,data2,action1,action2) {
+function changer(tid, text1,text2,data1,data2,action1,action2) {
+ var t_sw = elById(tid);
  var t = text1;
  var d = data1;
  var a = action1;
@@ -98,21 +117,9 @@ function dragElement(elmnt, elmnt2, x_loc, y_loc, dw_eval, move_eval, up_eval) {
 function topofpage(){
   var C = document.getElementByClass("button1").children;
   for(var x = 0; x < C.length; x++){
-    C[x].addEventListener("click", top, false);
+    C[x].addEventListener("click", Console.log.println("hi"), false);
     C[x].style.display = "none";
-}
-var showing = 0;
-  function top(){
-    if (showing == 0){
-      C[0].style.display = "none";
-      C[1].style.display = "block";
-      showing =1;
-    }
-    else {
-      C[1].style.display = "none";
-      C[0].style.display = "block";
-      showing = 0;
-    }
+  }
 }
 
 function goBack() {
@@ -120,20 +127,16 @@ function goBack() {
   
 }
 
-// ============ Entrance Image ============
+// ============ Slideshow ============
 var showing = 0
-function start(){
-startInterval();
+function Slideshow(){
   var C = document.getElementById("carrot").children;
-  for(var x = 0; x < C.length; x++){
-    C[x].className +="imgtest";
-    C[x].style.display = "none";
+  for(var x = 0; x < C.length; x++) {
+   C[x].style.display = "none";
   }
-
   C[0].style.display = "block";
-//  document.getElementById("program_button").addEventListener()
 }
-  function test(i){
+  function Change_Slide(i){
   var C = document.getElementById("carrot").children;
     showing += i;
     if (showing < 0){
