@@ -1,0 +1,34 @@
+@media screen and (max-width: 590px) {
+    .sum, .inf {
+        margin-bottom: .2em;
+        font-size: .9em;
+    }
+    #carrot {
+        width: 98%;
+        height: auto;
+    }
+    .rightpane {
+        display: none;
+    }
+
+}
+
+@media screen and (max-width: 600px) {
+    .card {
+        grid-template-columns: auto 1fr;
+        grid-template-areas:
+            "name summery"
+            "description description"
+    }
+    .cat, .id {
+        display: none;
+    }
+    #nio {
+        display: inline;
+        width: 100%;
+    }
+    #nav {
+        text-align: center;
+        width: 100%;
+    }
+}

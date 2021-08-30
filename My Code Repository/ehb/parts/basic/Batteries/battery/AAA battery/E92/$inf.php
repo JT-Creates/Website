@@ -1,0 +1,1 @@
+<?php $inf="Classification: Alkaline Chemical System: Zinc-Manganese Dioxide (Zn/MnO2 ) Designation: ANSI-24A, IEC-LR03 Nominal Voltage: 1.5 volts Nominal IR: 150 to 300 milliohms (fresh) Operating Temp: -18°C to 55°C (0°F to 130°F) Typical Weight: 11.5 grams (0.4 oz.) Typical Volume: 3.8 cubic centimeters (0.2 cubic inch) Jacket: Plastic Label Shelf Life: 10 years at 21°C";?>

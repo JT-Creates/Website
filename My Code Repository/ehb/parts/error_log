@@ -1,0 +1,6 @@
+[17-Aug-2021 15:48:30 UTC] PHP Warning:  opendir(Resource id #3/community/): Failed to open directory: No such file or directory in /home/u269816757/domains/codingcommons.tech/public_html/ehb/parts/browse.php on line 27
+[17-Aug-2021 15:48:30 UTC] PHP Fatal error:  Uncaught TypeError: readdir(): Argument #1 ($dir_handle) must be of type resource or null, bool given in /home/u269816757/domains/codingcommons.tech/public_html/ehb/parts/browse.php:28
+Stack trace:
+#0 /home/u269816757/domains/codingcommons.tech/public_html/ehb/parts/browse.php(28): readdir()
+#1 {main}
+  thrown in /home/u269816757/domains/codingcommons.tech/public_html/ehb/parts/browse.php on line 28

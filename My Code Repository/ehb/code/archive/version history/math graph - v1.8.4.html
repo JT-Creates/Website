@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="./style/main.css"/>
+<title>Graph</title>
+<script type="text/javascript" src="https://pagecdn.io/lib/mathjs/7.1.0/math.min.js"></script>
+<script type="text/javascript" src="./js/mat_module_lib.js"></script>
+<script type="text/javascript" src="./js/mat_graph_lib.js"></script>
+<script type="text/javascript">
+var s_width = 0, s_height = 0, view_width = 0, view_height = 0;
+var obj = draw;
+function start(st){
+  obj.clear();
+  eval(st);
+  obj.refresh_ctx();
+}
+function startTimeoutChain() { //Represents 1 loop cyele
+  setTimeout(function() {
+    if (view_width != window.innerWidth || s_width != document.getElementById("main_container").clientWidth || s_height != document.getElementById("body").clientHeight || view_height != window.innerHeight){
+      view_width = window.innerWidth;
+      view_height = window.innerHeight;
+      s_width = document.getElementById("main_container").clientWidth;
+      s_height = document.getElementById("body").clientHeight;
+      console.log("Height: " + view_height);
+      console.log("Width: " + view_width);
+      start("obj.resizeCanvas();");
+    };
+    startTimeoutChain(); // Begin next loop
+  }, 1401);
+}
+function go_time(){
+dragElement(document.getElementById("split_handle"),document.getElementById("split_handle_hit_box"),true,false,document.getElementById("control_pane"),document.getElementById("r_col"));
+textswitch = document.getElementById("btn_r");
+startTimeoutChain();
+start("obj.reset();obj.initialize();");
+}
+</script>
+<script type="text/javascript" src="./js/Piece.js"></script>
+<script type="text/javascript" src="./js/Board.js"></script>
+<script type="text/javascript" src="./js/MinimaxFunctions.js"></script>
+<script type="text/javascript" src="./js/sketch.js"></script>
+</head> 
+<body id="body" onload="elementsadd();eventhandle();go_time();">
+<div id="main_container">
+<div id="control_pane" onchange="start('var btncr = document.getElementById(&quot;btn_r&quot;); if(btncr.value == &quot;Demo&quot;){obj.initialize();}else{obj.plot_me();};')">
+<ul id="controls" onchange="draw.ctx_ws = eval(document.getElementById('scalex').value); draw.ctx_hs = eval(document.getElementById('scaley').value); draw.x_shift = parseFloat(document.getElementById('shiftx').value); draw.y_shift = parseFloat(document.getElementById('shifty').value); draw.g_resx = parseFloat(document.getElementById('g_res').value); start('var btncr = document.getElementById(&quot;btn_r&quot;); if(btncr.value == &quot;Demo&quot;){obj.initialize();}else{obj.plot_me();};');">
+<li class="scalex">
+<input type="text" id="scalex" oninput="draw.ctx_ws = eval(document.getElementById('scalex').value);" placeholder="x-scale"></input>
+</li><li class="scaley">
+<input type="text" id="scaley" oninput="draw.ctx_hs = eval(document.getElementById('scaley').value);" placeholder="y-scale"></input>
+</li><li class="shiftx">
+<input type="number" id="shiftx" step="0.001" placeholder="horisontal shift"></input>
+</li><li class="shifty">
+<input type="number" id="shifty" step="0.001" placeholder="vertical shift"></input>
+</li><li class="g_res">
+<input type="number" id="g_res" min="0.1" step="0.01" placeholder="vertical shift"></input>
+</li></ul>
+<button id="btn_c" onclick="start()">clear</button>
+<button id="btn_r" onclick="changer('Graph','Demo');start('var btncr = document.getElementById(&quot;btn_r&quot;); if(btncr.value == &quot;Demo&quot;){obj.initialize();}else{obj.plot_me();};')" value="Demo">Demo</button>
+<button id="name" onclick="elementsadd()">add</button>
+<button onclick="draw.plot_me()">submit</button>
+</div>
+<div class="elms" id="els"></div>
+<div id="split_handle"><div id="split_handle_hit_box" onclick="console.log('split_handle');" style="top:45%;bottom:45%;display:block;padding-top:1000%;padding-bottom:1000%;height:11pt;width:0.6em; align-items:center; align-content:center;color:lightgray; font:8pt arial;">▓</div></div>
+<div id="r_col" class="right_pane">
+<canvas id="canvas"></canvas>
+</div>
+</div>
+</body>
+</html>

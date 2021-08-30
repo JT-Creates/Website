@@ -1,0 +1,1 @@
+<?php $inf="Composition: Alkaline-Manganese Dioxide Battery Nominal voltage 1.5 V Impedance 114 m-ohm @ 1 kHz Typical weight 11 g (0.4 oz) Typicalvolume 3.5 cm3 (0.2 in3 ) Terminals Flat Storage temperature range 5ºCto 30ºC(41ºFto 86ºF) Operating temperature range -20ºCto 54ºC(-4ºFto 130ºF) Designation ANSI: 24A IEC: LR03";?>

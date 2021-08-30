@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<h1>Welcome to the Summer Celebration! Enjoy the show!</h1>
+
+<p style="position: absolute; top:-10000; height:0px; with:0px; font-size:0pt; border: 0px solid transparent;"><button onclick="playVid()" style="position: absolute; top:-10000; height:0px; with:0px; font-size:0pt; background: transparent; color: transparent; border: 0px solid transparent;" type="button">Play Video</button><button onclick="pauseVid()" style="position: absolute; top:-10000; height:0px; with:0px; font-size:0pt; background: transparent; color: transparent; border: 0px solid transparent;" type="button">Pause Video</button></p>
+
+<video id="vid" controls="" controlslist="nodownload" height="auto" style="background: transparent; color: inherit;" width="100%">
+<source src="https://www.dropbox.com/s/3j7aii9cj8u1m51/Dream%20Seeker%20Full%20Show.mp4?raw=true" type="video/mp4" />
+</video>
+
+<script language="javascript">
+var vid = document.getElementById("vid");
+function playVid() {
+  vid.play();
+}
+function pauseVid() {
+  vid.pause();
+}
+</script>
+</body>
+</html>

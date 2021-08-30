@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/stylesheet" href="./style/main.css"/>
+<title>Canvas code example</title>
+<script type="text/javascript" src="https://pagecdn.io/lib/mathjs/7.1.0/math.min.js"></script>
+<script type="text/javascript" src="./js/mat_module_lib.js"></script>
+<script type="text/javascript" src="./js/mat_graph_lib.js"></script>
+<script type="text/javascript">
+function start(st){
+var obj = draw;
+obj.clear();
+obj.refresh_ctx();
+eval(st);
+}
+function fbns(x) {var hello3 = 1;
+var i;
+var fib = []; // Initialize array!
+
+fib[0] = 0;
+fib[1] = 1;
+for (var i = 2; i <= 10; i++) {
+  // Next fibonacci number = previous + one before previous
+  // Translated to JavaScript:
+  fib[i] = fib[i - 2] + fib[i - 1];
+  console.log(fib[i]);
+};
+return fib[x];}
+
+var draw = {
+ ctx_ws : ctx_ws = 0.5,
+ ctx_hs : ctx_hs = 0.5,
+ x_shift : x_shift = 0.5,
+ y_shift : y_shift = 0.5,
+ N_mode : N_mode = true,
+ reset : function(){
+  this.ctx_ws = 66.6;
+  this.ctx_hs = 29.61;
+  this.x_shift = 0.5;
+  this.y_shift = 0.5;
+  this.N_mode = true;
+  document.getElementById("scalex").value = this.ctx_ws;
+  document.getElementById("scaley").value = this.ctx_hs;
+  document.getElementById("shiftx").value = this.x_shift;
+  document.getElementById("shifty").value = this.y_shift;
+ },
+ clear : function(){
+  var canvas = document.getElementById("canvas");
+  if (null==canvas || !canvas.getContext) return;
+  var axes={}, ctx = canvas.getContext("2d");
+  ctx.fillStyle = "rgb(255, 255, 255)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+ },
+ refresh_ctx : function(){
+  var canvas = document.getElementById("canvas");
+  if (null==canvas || !canvas.getContext) return;
+  var axes={}, ctx = canvas.getContext("2d");
+  axes.x0 = .5 + this.x_shift*canvas.width;  // x0 pixels from left to x=0
+  axes.y0 = .5 + this.y_shift*canvas.height; // y0 pixels from top to y=0
+  axes.scalex = this.ctx_ws;             // 40 pixels from x=0 to x=1
+  axes.scaley = this.ctx_hs;             // 40 pixels from x=0 to x=1
+  axes.scalem = (canvas.width*canvas.height)/(this.ctx_ws*this.ctx_hs);
+  axes.doNegativeX = this.N_mode;
+  showAxes(ctx,axes);
+  ctx.fillStyle = "gray";
+ ctx.font = "12px Arial";
+ ctx.textAlign = "left";
+ ctx.fillText("Programed by: JT", canvas.width - 128, canvas.height - 16);
+  ctx.
+  return;
+ },
+ initialize : function() {
+  var canvas = document.getElementById("canvas");
+  if (null==canvas || !canvas.getContext) return;
+  var axes={}, ctx = canvas.getContext("2d");
+  axes.x0 = .5 + this.x_shift*canvas.width;  // x0 pixels from left to x=0
+  axes.y0 = .5 + this.y_shift*canvas.height; // y0 pixels from top to y=0
+  axes.scalex = this.ctx_ws;             // 40 pixels from x=0 to x=1
+  axes.scaley = this.ctx_hs;             // 40 pixels from x=0 to x=1
+  axes.scalem = axes.scalex / 3;
+  axes.doNegativeX = this.N_mode;
+  funGraph(ctx,axes,fun1,"rgb(11,153,11)",1,"f(x) = 6*sin(x)", axes.scaley, 15,true); 
+  funGraph(ctx,axes,fun2,"rgb(66,44,255)",1,"f(x) = 6*cos(2x)", axes.scaley, 30,true);
+ },
+ plot_me : function() {
+  var canvas = document.getElementById("canvas");
+  if (null==canvas || !canvas.getContext) return;
+  var axes={}, ctx = canvas.getContext("2d");
+  axes.x0 = .5 + this.x_shift*canvas.width;  // x0 pixels from left to x=0
+  axes.y0 = .5 + this.y_shift*canvas.height; // y0 pixels from top to y=0
+  axes.scalex = this.ctx_ws;             // 40 pixels from x=0 to x=1
+  axes.scaley = this.ctx_hs;             // 40 pixels from x=0 to x=1
+  axes.doNegativeX = this.N_mode;
+  var elol = document.getElementById("els");
+  var item_0 = document.querySelectorAll(".val_0");
+  var item_1 = document.querySelectorAll(".val_1");
+  var item_2 = document.querySelectorAll(".val_2");
+  for(var i = 0; i < elol.children.length; i++){
+   var fn = "y";
+   if(item_2[i].checked == false) {
+   fn = "x";
+   };
+   funGraph(ctx,axes,function(x){return eval(item_1[i].value);}, item_0[i].value,1, fn + i +" = "+ item_1[i].value, axes.scaley, i*15+15,item_2[i].checked);
+  };
+ }
+}
+
+function funGraph(ctx,axes,func,color,thick,text_str,xtext,ytext,fn) {
+ var xx, yy, dx=0.1, x0=axes.x0, y0=axes.y0, scale=axes.scalex;
+ var iMax = Math.round((ctx.canvas.width-x0)/dx);
+ var iMin = axes.doNegativeX ? Math.round(-x0/dx) : 0;
+ ctx.beginPath();
+ ctx.lineWidth = 1;
+ ctx.strokeStyle = color;
+ for (var i=iMin;i<=iMax;i+=dx) {
+  if (fn == true) {
+  xx = dx*i;
+  yy = axes.scaley*func(xx/axes.scalex);
+  if (i==iMin) ctx.moveTo(x0+xx,y0-yy);
+  else         ctx.lineTo(x0+xx,y0-yy);
+  } else {
+  yy = dx*i;
+  xx = axes.scalex*func(yy/axes.scaley);
+  if (i==iMin) ctx.moveTo(x0+xx,y0-yy);
+  else         ctx.lineTo(x0+xx,y0-yy);
+  };
+ };
+ ctx.stroke();
+ ctx.fillStyle = "rgb(190,190,190)";
+ ctx.fillRect(xtext-6,ytext-12,text_str.length*6, 15);
+ ctx.font = "12px Arial";
+ ctx.textAlign = "left";
+ ctx.fillStyle = color;
+ ctx.fillText(text_str, xtext, ytext);
+}
+
+</script>
+</head>
+<body onload="start('obj.reset();obj.clear();obj.refresh_ctx();obj.initialize();elementsadd();')">
+<div class="left_pane">
+<div>
+<ul onchange="start('var btncr = document.getElementById(&quot;btn_r&quot;); if(btncr.value == &quot;reset&quot;){obj.initialize();}else{obj.plot_me();};')">
+<li>
+<input type="text" id="scalex" onchange="draw.ctx_ws = eval(document.getElementById('scalex').value); " min=0.1 onchange="validity.valid||(value='1');" placeholder="x-scale"></input>
+</li><li>
+<input type="text" id="scaley" onchange="draw.ctx_hs = eval(document.getElementById('scaley').value); " min=0.01 onchange="validity.valid||(value='1');" placeholder="y-scale"></input>
+</li><li>
+<input type="number" id="shiftx" onchange="draw.x_shift = parseFloat(document.getElementById('shiftx').value); " step="0.001" placeholder="horisontal shift"></input>
+</li><li>
+<input type="number" id="shifty" onchange="draw.y_shift = parseFloat(document.getElementById('shifty').value); " step="0.001" placeholder="vertical shift"></input>
+</li></ul>
+<button id="btn_c" onclick="start()">clear</button>
+<button id="btn_r" onclick="changer()" value="reset">Demo</button>
+<button id="name" onclick="elementsadd()">add</button>
+<ol id="els">
+</ol>
+</div>
+<div class="right_pane">
+<canvas id="canvas" width="600" height="600" style="background-color:white;display:block;"></canvas>
+</div>
+</body>
+</html>

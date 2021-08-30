@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head><title>Canvas code example</title>
+<script type="text/javascript" src="https://pagecdn.io/lib/mathjs/7.1.0/math.min.js"></script>
+<script type="text/javascript">
+function start(st){
+var obj = draw;
+obj.clear();
+obj.refresh_ctx();
+eval(st);
+}
+function fun1(x) {var hello = 6*Math.exp(x); return hello;}
+function fun2(x) {var hello1 = Math.pow((Math.tan((Math.cos(6/x)*Math.cos(2*Math.cos((x/Math.PI)))))),Math.sin(x)); return hello1;}
+function fun3(x) {return Math.sqrt(x); }
+function fun4(x) {return 3; }
+
+function elementsadd(){
+var elol = document.getElementById("els");
+elol.innerHTML += "<li id=&quot;"+elid+"><div><ul onchange=&quot;draw.plot_me()&quot;><li>"+
+"<input id=&quot;val_0&quot; type=&quot;text&quot; placeholder=&quot;color&quot;></input></li><li>"+
+"<input id=&quot;val_1&quot; type=&quot;text&quot; placeholder=&quot;function&quot;></input></li><li>"+
+"<button id=&quot;name&quot; onclick=&quot;draw.plot_me()&quot;>submit</button>"+
+"</li></ul></div></li>";
+
+var draw = {
+ ctx_ws : ctx_ws = 90, //function() {return ctx_ws;},
+ ctx_hs : ctx_hs = 40, //function() {return ctx_hs;},
+ x_shift : x_shift = 0.5, //function() {return x_shift;},
+ y_shift : y_shift = 0.5, //function() {return y_shift;},
+ N_mode : N_mode = true, //function() {return N_mode;},
+ reset : function(){
+  this.ctx_ws = 90;
+  this.ctx_hs = 40;
+  this.x_shift = 0.5;
+  this.y_shift = 0.5;
+  this.N_mode = true;
+  document.getElementById("scalex").value = this.ctx_ws;
+  document.getElementById("scaley").value = this.ctx_hs;
+  document.getElementById("shiftx").value = this.x_shift;
+  document.getElementById("shifty").value = this.y_shift;
+ },
+ clear : function(){
+  var canvas = document.getElementById("canvas");
+  if (null==canvas || !canvas.getContext) return;
+  var axes={}, ctx = canvas.getContext("2d");
+  ctx.fillStyle = "rgb(255, 255, 255)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+ },
+ refresh_ctx : function(){
+  var canvas = document.getElementById("canvas");
+  if (null==canvas || !canvas.getContext) return;
+  var axes={}, ctx = canvas.getContext("2d");
+  axes.x0 = .5 + this.x_shift*canvas.width;  // x0 pixels from left to x=0
+  axes.y0 = .5 + this.y_shift*canvas.height; // y0 pixels from top to y=0
+  axes.scalex = this.ctx_ws;             // 40 pixels from x=0 to x=1
+  axes.scaley = this.ctx_hs;             // 40 pixels from x=0 to x=1
+  axes.scalem = axes.scalex / 3;
+  axes.doNegativeX = this.N_mode;
+  showAxes(ctx,axes);
+  return;
+ },
+ initialize : function() {
+  var canvas = document.getElementById("canvas");
+  if (null==canvas || !canvas.getContext) return;
+  var axes={}, ctx = canvas.getContext("2d");
+  axes.x0 = .5 + this.x_shift*canvas.width;  // x0 pixels from left to x=0
+  axes.y0 = .5 + this.y_shift*canvas.height; // y0 pixels from top to y=0
+  axes.scalex = this.ctx_ws;             // 40 pixels from x=0 to x=1
+  axes.scaley = this.ctx_hs;             // 40 pixels from x=0 to x=1
+  axes.scalem = axes.scalex / 3;
+  axes.doNegativeX = this.N_mode;
+  funGraph(ctx,axes,fun1,"rgb(11,153,11)",1,"f(x) = 6*sin(x)", axes.scaley, 15); 
+  funGraph(ctx,axes,fun2,"rgb(66,44,255)",1,"f(x) = 6*cos(2x)", axes.scaley, 30);
+ },
+ plot_me : function() {
+  var canvas = document.getElementById("canvas");
+  if (null==canvas || !canvas.getContext) return;
+  var axes={}, ctx = canvas.getContext("2d");
+  axes.x0 = .5 + this.x_shift*canvas.width;  // x0 pixels from left to x=0
+  axes.y0 = .5 + this.y_shift*canvas.height; // y0 pixels from top to y=0
+  axes.scalex = this.ctx_ws;             // 40 pixels from x=0 to x=1
+  axes.scaley = this.ctx_hs;             // 40 pixels from x=0 to x=1
+  axes.doNegativeX = this.N_mode;
+  funGraph(ctx,axes,function(x){return eval(document.getElementById("val_1").value);},document.getElementById("val_0").value,1,"f(x) = "+document.getElementById("val_1").value, axes.scaley, 60);
+  return;
+ }
+}
+
+function funGraph(ctx,axes,func,color,thick,text_str,xtext,ytext) {
+ var xx, yy, dx=0.1, x0=axes.x0, y0=axes.y0, scale=axes.scalex;
+ var iMax = Math.round((ctx.canvas.width-x0)/dx);
+ var iMin = axes.doNegativeX ? Math.round(-x0/dx) : 0;
+ ctx.beginPath();
+ ctx.lineWidth = 0.8;
+ ctx.strokeStyle = color;
+ for (var i=iMin;i<=iMax;i+=dx) {
+  xx = dx*i; yy = axes.scaley*func(xx/axes.scalex);
+  if (i==iMin) ctx.moveTo(x0+xx,y0-yy);
+  else         ctx.lineTo(x0+xx,y0-yy);
+ }
+ ctx.stroke();
+ ctx.fillStyle = color;
+ ctx.font = "12px Arial";
+ ctx.textAlign = "left";
+ ctx.fillText(text_str, xtext, ytext);
+}
+
+function showAxes(ctx,axes) {
+ var x0=axes.x0, w=ctx.canvas.width;
+ var y0=axes.y0, h=ctx.canvas.height;
+ var xmin = axes.doNegativeX ? 0 : x0;
+ var cscalev= (y0 + x0)/axes.scalem;
+ ctx.beginPath();
+ ctx.strokeStyle = "rgb(180,180,180)"; 
+ for(var mx = x0; mx <= w; mx += axes.scalex){
+  ctx.moveTo(mx,y0+4); ctx.lineTo(mx,y0-4);  // X axis
+  for(var nx = mx; nx <= mx + axes.scalex; nx += axes.scalem){
+   ctx.moveTo(nx,y0-2); ctx.lineTo(nx,y0+2);  // X axis
+  };
+  ctx.fillStyle = "rgb(100,200,200)";
+  ctx.font = "9px Arial";
+  ctx.textAlign = "center";
+  ctx.fillText(Math.round(((((mx)/axes.scalex)-(1/(2*axes.scalex)+1))),16), x0+mx-axes.scalex/2, y0-8);
+ };
+ for(var my = y0; my >= -h; my -= axes.scaley){ 
+  ctx.moveTo(x0-4,my);    ctx.lineTo(x0+4,my);  // Y axis
+  for(var ny = my; ny >= my - axes.scaley; ny -= axes.scalem){
+   ctx.moveTo(x0-2,ny);    ctx.lineTo(x0-2,ny);  // Y axis
+  };
+  ctx.fillStyle = "rgb(100,200,200)";
+  ctx.font = "9px Arial";
+  ctx.textAlign = "left";
+  ctx.fillText(Math.round(-((((my)/axes.scaley)-(1/(2*axes.scaley)))),32), x0+8, y0+my);
+ };
+ for(var mx = x0; mx >= -w; mx -= axes.scalex){
+  ctx.moveTo(mx,y0+4); ctx.lineTo(mx,y0-4);  // X axis
+  for(var nx = mx; nx >= mx - axes.scalex; nx -= axes.scalem){
+   ctx.moveTo(nx,y0-2); ctx.lineTo(nx,y0+2);  // X axis
+  };
+  ctx.fillStyle = "rgb(100,200,200)";
+  ctx.font = "9px Arial";
+  ctx.textAlign = "center";
+  ctx.fillText(Math.round(((((mx)/axes.scalex)-(1/(2*axes.scalex)+1))),32), x0+mx-axes.scalex/2, y0-8);
+ };
+ for(var my = y0; my <= h; my += axes.scaley){ 
+  ctx.moveTo(x0-4,my);    ctx.lineTo(x0+4,my);  // Y axis
+  for(var ny = my; ny <= my + axes.scaley; ny += axes.scalem){
+   ctx.moveTo(x0-2,ny);    ctx.lineTo(x0-2,ny);  // Y axis
+  };
+ };
+ ctx.strokeStyle = "rgb(128,128,128)"; 
+ ctx.moveTo(xmin,y0); ctx.lineTo(w,y0);  // X axis
+ ctx.moveTo(x0,0);    ctx.lineTo(x0,h);  // Y axis
+ ctx.stroke();
+}
+</script>
+</head>
+<body onload="start('obj.initialize()')">
+<div>
+<ul onchange="start('var btncr = document.getElementById(&quot;btn_cr&quot;); if(btncr.value == &quot;clear&quot;){obj.initialize();};')">
+<li>
+<input type="number" id="scalex" onchange="draw.ctx_ws = parseFloat(document.getElementById('scalex').value); " step="0.1" min=0.1 onchange="validity.valid||(value='1');" value="90"></input>
+</li><li>
+<input type="number" id="scaley" onchange="draw.ctx_hs = parseFloat(document.getElementById('scaley').value); " step="0.1" min=0.01 onchange="validity.valid||(value='1');" value="40"></input>
+</li><li>
+<input type="number" id="shiftx" onchange="draw.x_shift = parseFloat(document.getElementById('shiftx').value); " step="0.001" value="0.5"></input>
+</li><li>
+<input type="number" id="shifty" onchange="draw.y_shift = parseFloat(document.getElementById('shifty').value); " step="0.001" value="0.5"></input>
+</li></ul>
+<button id="btn_cr" onclick="changer()" value="clear">clear</button>
+<script type="text/javascript">
+function changer() {
+ var btncr = document.getElementById("btn_cr");
+ if(btncr.value == "clear") {
+  btncr.value = "reset";
+  btncr.innerHTML = "reset";
+  start("return");
+ } else {
+  btncr.value = "clear";
+  btncr.innerHTML = "clear";
+  start("obj.reset();obj.initialize()");
+ };
+}
+</script>
+<ol>
+<li>
+<div>
+<ul><li>
+<input id="val_0" type="text" placeholder="color"></input>
+</li><li>
+<input id="val_1" type="text" placeholder="function"></input>
+</li><li>
+<button id="name" onclick="draw.plot_me()">submit</button>
+</li></ul>
+</div>
+</li>
+</ol>
+<canvas id="canvas" width="600" height="600" style="background-color:white;"></canvas>
+</body>
+</html>

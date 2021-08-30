@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head><title>Canvas code example</title>
+<script type="text/javascript">
+// JavaScript source code goes here
+var cscale = 20;
+var cscalem = cscale/2;
+function fun1(x) {return Math.sin(x);  }
+function fun2(x) {return 3;            }
+function fun3(x) {return Math.sqrt(x); }
+
+function draw() {
+ var canvas = document.getElementById("canvas");
+ if (null==canvas || !canvas.getContext) return;
+
+ var axes={}, ctx=canvas.getContext("2d");
+ axes.x0 = .5 + .5*canvas.width;  // x0 pixels from left to x=0
+ axes.y0 = .5 + .5*canvas.height; // y0 pixels from top to y=0
+ axes.scale = cscale;              // 40 pixels from x=0 to x=1
+ axes.doNegativeX = true;
+ ctx.fillStyle = 'rgb(255, 255, 255)';
+ ctx.fillRect(0, 0, canvas.width, canvas.height);
+ showAxes(ctx,axes);
+ //funGraph(ctx,axes,fun1,"rgb(11,153,11)",1); 
+ funGraph(ctx,axes,fun2,"rgb(66,44,255)",2);
+ funGraph(ctx,axes,fun3,"rgb(166,44,55)",0.5);
+}
+
+function funGraph (ctx,axes,func,color,thick) {
+ var xx, yy, dx=4, x0=axes.x0, y0=axes.y0, scale=axes.scale;
+ var iMax = Math.round((ctx.canvas.width-x0)/dx);
+ var iMin = axes.doNegativeX ? Math.round(-x0/dx) : 0;
+ ctx.beginPath();
+ ctx.lineWidth = thick;
+ ctx.strokeStyle = color;
+
+ for (var i=iMin;i<=iMax;i++) {
+  xx = dx*i; yy = scale*func(xx/scale);
+  if (i==iMin) ctx.moveTo(x0+xx,y0-yy);
+  else         ctx.lineTo(x0+xx,y0-yy);
+ }
+ ctx.stroke();
+}
+
+function showAxes(ctx,axes) {
+ var x0=axes.x0, w=ctx.canvas.width;
+ var y0=axes.y0, h=ctx.canvas.height;
+ var xmin = axes.doNegativeX ? 0 : x0;
+ ctx.beginPath();
+ ctx.strokeStyle = "rgb(180,180,180)"; 
+ for(var mx = 1; mx < w; mx ++){
+  //ctx.beginPath();
+  //ctx.strokeStyle = "rgb(180,180,180)"; 
+  ctx.moveTo(x0+4,mx*y0+cscale); ctx.lineTo(x0-4,mx*y0+cscale);  // X axis
+  ctx.moveTo(x0-4,mx*y0-cscale); ctx.lineTo(x0+4,mx*y0-cscale);  // X axis
+  //ctx.stroke();
+  for(var nx = 1; nx < w; nx ++){
+   //ctx.beginPath();
+   //ctx.strokeStyle = "rgb(180,180,180)"; 
+   ctx.moveTo(x0+2,nx*y0+cscalem); ctx.lineTo(x0-2,nx*y0+cscalem);  // X axis
+   ctx.moveTo(x0-2,nx*y0-cscalem); ctx.lineTo(x0+2,nx*y0-cscalem);  // X axis
+   //ctx.stroke();
+  };
+ };
+
+ for(var my = 1; my < cscale; my ++){
+  //ctx.beginPath();
+  //ctx.strokeStyle = "rgb(180,180,180)"; 
+  ctx.moveTo(my*x0+cscale,y0+4);    ctx.lineTo(my*x0+cscale,y0-4);  // Y axis
+  ctx.moveTo(my*x0-cscale,y0-4);    ctx.lineTo(my*x0-cscale,y0+4);  // Y axis
+  //ctx.stroke();
+  for(var ny = 1; ny < cscalem; ny++){
+   //ctx.beginPath();
+   //ctx.strokeStyle = "rgb(180,180,180)"; 
+   ctx.moveTo(ny*x0+cscalem,y0+2);    ctx.lineTo(ny*x0+cscalem,y0-2);  // Y axis
+   ctx.moveTo(ny*x0-cscalem,y0-2);    ctx.lineTo(ny*x0-cscalem,y0+2);  // Y axis
+   //ctx.stroke();
+  };
+ };
+ //ctx.beginPath();
+ ctx.strokeStyle = "rgb(128,128,128)"; 
+ ctx.moveTo(xmin,y0); ctx.lineTo(w,y0);  // X axis
+ ctx.moveTo(x0,0);    ctx.lineTo(x0,h);  // Y axis
+ ctx.stroke();
+}
+</script>
+</head>
+<body onload="draw()">
+<canvas id="canvas" width="200" height="200" style="background-color:white;"></canvas>
+</body>
+</html>

@@ -1,0 +1,108 @@
+::-webkit-scrollbar {
+  position: relative;
+  display: block;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  width: 10px;  /* Remove scrollbar space */
+  background: transparent;  /* Optional: just make scrollbar invisible */
+}
+/* Optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+  position: relative;
+  display: block;
+  margin: -10px;
+  padding: 0;
+  overflow: hidden;
+  height: 10px;
+  width: 12px;  /* Remove scrollbar space */
+  background: transparent;  /* Optional: just make scrollbar invisible */
+  background-color: red;  
+}
+
+html {
+position: absolute;
+bottom: 0;
+left: 0;
+right: 0;
+top: 0;
+margin: 0;
+padding: 0;
+overflow: hidden;
+width: 100%;
+height: 100%;
+vertical-align: middle;
+background-image: linear-gradient(#9999ed 5%, #ffffed 25%, #dddded 50%, #cccced, #aaaaff);
+}
+
+body{
+vertical-align: middle;
+margin: auto;
+position: relative;
+padding: 0.8em;
+font: 12pt arial;
+width: 90vw;
+height: 95vh;
+background-color: white;
+}
+
+div, span, canvas, li, ol, ul, button, input, p, br, body {
+border-radius: 1.6%;
+position: relative;
+}
+
+ul {
+list-style: none;
+padding-left: 0;
+}
+
+.left_pane, #split_handle, .right_pane {
+display: inline-block;
+height: 100%;
+vertical-align: middle;
+}
+
+.elms {
+position: relative;
+display: block;
+height: 400px;
+bottom: 0;
+overflow-y: scroll;
+background-color: #cdcdcd;
+}
+
+.small_card {
+margin: 4pt;
+padding: 4pt;
+border: 0.5pt solid lightgray;
+background-color: #ededed;
+}
+
+.RS {
+display: block;
+margin-left: auto;
+margin-right: 0;
+right: 0;
+}
+
+.LS {
+display: block;
+margin-left: 0;
+margin-right: auto;
+left: 0;
+}
+
+canvas {
+position: relative;
+display: block;
+}
+
+#split_handle {
+position: relative;
+margin:0 0.2em;
+width: 0.6em;
+text-align: center;
+align-content: middle;
+align-items: middle;
+background-image: linear-gradient(90deg,white,gray,white);
+}

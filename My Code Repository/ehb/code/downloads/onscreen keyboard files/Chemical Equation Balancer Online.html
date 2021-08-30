@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<!-- saved from url=(0040)http://www.endmemo.com/chem/balancer.php -->
+<html>
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+    <meta content="width=device-width; initial-scale=1.0" name="viewport">
+    <script language="javascript" src="searchajax.js"></script>
+    <script language="javascript">
+document.onclick = onMainClick; 
+function onMainClick(ev){document.getElementById('mainsearch_suggest').innerHTML = '';}
+
+    </script>
+    <title>Chemical Equation Balancer Online</title>
+    <meta content="Chemical Equation Balancer" name="keywords">
+    <meta content="Balance or Check the Balance of Chemical Equations Online" name="description">
+    <script language="JavaScript" src="balancer_ajax.js"></script>
+    <style type="text/css">
+.tb td{text-align:center;font-size:14px;color: #444444;BORDER-COLLAPSE: collapse;width:32px;cursor:default}	
+.nonmetal{background-color: lightgreen;BORDER-TOP: #3F34FF 2px solid;BORDER-LEFT: #3F34FF 2px solid;}
+.noble{	background-color: lightblue;BORDER-TOP: #3F34FF 2px solid;BORDER-LEFT: #3F34FF 2px solid;}
+.halogens{background-color: lightseagreen;BORDER-TOP: #3F34FF 2px solid;BORDER-LEFT: #3F34FF 2px solid;}
+.othernonmetal{background-color: lightgrey;BORDER-TOP: #3F34FF 2px solid;BORDER-LEFT: #3F34FF 2px solid;}
+.metal{background-color: lightpink;BORDER-TOP: #3F34FF 2px solid;BORDER-LEFT: #3F34FF 2px solid;}
+.transitionmetal{background-color: #ddB6C1;BORDER-TOP: #3F34FF 2px solid;BORDER-LEFT: #3F34FF 2px solid;}
+.alkali{background-color: #ff9900;BORDER-TOP: #3F34FF 2px solid;BORDER-LEFT: #3F34FF 2px solid;}
+.alkaliearth{background-color: yellow;BORDER-TOP: #3F34FF 2px solid;BORDER-LEFT: #3F34FF 2px solid;}
+.lanthanoids{background-color: #ffd6C1;width:32px;text-align:center;font-size:14px;BORDER-TOP: #3F34FF 2px solid;BORDER-LEFT: #3F34FF 2px solid;}
+.actinoids{background-color: #ffc6d1;BORDER-TOP: #3F34FF 2px solid;BORDER-LEFT: #3F34FF 2px solid;BORDER-BOTTOM: #3F34FF 2px solid;}				
+.nm{BORDER-TOP: #3F34FF 2px solid;BORDER-LEFT: #3F34FF 2px solid;}
+gr{color: green;font-weight:bold}
+rd{color: red;}
+bl{color: blue;}
+
+    </style>
+    <script language="javascript">
+var arreqs = new Array();
+function ChemElem(str)
+{
+    if (str == "3-"
+	    || str == "2-"
+	    || str == "1-"
+	    || str == "1+"
+	    || str == "2+"
+	    || str == "3+"
+	)
+	{
+	     document.bal.equation.value += "{" + str + "}";
+	}
+	else
+	     document.bal.equation.value += str;
+		 
+	document.bal.equation.focus();
+	searchSuggest();
+}
+
+document.onclick = onClick; 
+function onClick(ev) 
+{ 
+document.getElementById('search_suggest').innerHTML = '';
+document.getElementById('mainsearch_suggest').innerHTML = '';
+} 
+function changeCell(td)
+{
+    td.style.background="#bbbbbb";
+
+	td.onmouseout=function() 
+	{
+	   td.style.background="#ffffff";
+	}
+}
+function clearbal()
+{
+    //alert("good");
+    document.bal.equation.value="";
+	
+	var ss = document.getElementById('yn');
+	ss.innerHTML = "";
+	var ss2 = document.getElementById('sh');
+	ss2.innerHTML = "";
+ 	document.bal.equation.focus();
+}
+
+/*
+function redo()
+{
+   //alert("redo");
+   re = re + 1;
+   if (re >= sg1.length-1)
+   {
+      re = sg1.length-1;
+	  document.cs.redo2.disabled = true;	  
+   }
+   
+   un = re;
+   document.cs.undo2.disabled = false;	  
+   
+    document.cs.g1.value = sg1[re];
+	document.cs.se.value=sse[re];
+	document.cs.mean.value=smean[re];
+	document.cs.sd.value=ssd[re];
+	document.cs.v.value=sv[re];
+	document.cs.median.value = smedian[re];
+	document.cs.n.value = sn[re];
+}
+
+function undo()
+{
+   un = un -1;
+   if (un <= 0)
+   {
+      un = 0;
+	  document.cs.undo2.disabled = true;
+	  
+   }
+   
+   re = un;
+   document.cs.redo2.disabled = false;	
+  
+    document.cs.g1.value = sg1[un];
+	document.cs.se.value=sse[un];
+	document.cs.mean.value=smean[un];
+	document.cs.sd.value=ssd[un];
+	document.cs.v.value=sv[un];
+	document.cs.median.value = smedian[un];
+	document.cs.n.value = sn[un];
+}
+*/
+
+    </script>
+</head>
+<body onload="document.bal.equation.focus()">
+
+<div class="cmtable">
+    <table cellpadding="0" cellspacing="0" class="tb" width="576">
+        <tbody>
+        <tr>
+            <td class="nonmetal" onclick="ChemElem('H')" style="BORDER-RIGHT: #3F34FF 2px solid;"
+                title="1 Hydrogen MW 1.00794">H
+            </td>
+            <td width="32">
+            </td>
+            <td class="nm" onclick="ChemElem('0')">0
+            </td>
+            <td class="nm" onclick="ChemElem('1')">1
+            </td>
+            <td class="nm" onclick="ChemElem('2')">2
+            </td>
+            <td class="nm" onclick="ChemElem('3')">3
+            </td>
+            <td class="nm" onclick="ChemElem('4')">4
+            </td>
+            <td class="nm" onclick="ChemElem('5')">5
+            </td>
+            <td class="nm" onclick="ChemElem('6')">6
+            </td>
+            <td class="nm" onclick="ChemElem('7')">7
+            </td>
+            <td class="nm" onclick="ChemElem('8')">8
+            </td>
+            <td class="nm" onclick="ChemElem('9')" style="BORDER-RIGHT: #3F34FF 2px solid;">9
+            </td>
+            <td colspan="5">
+            </td>
+            <td class="noble" onclick="ChemElem('He')" style="BORDER-RIGHT: #3F34FF 2px solid;"
+                title="2 Helium MW 4.002602">He
+            </td>
+        </tr>
+        <tr>
+            <td class="alkali" onclick="ChemElem('Li')" title="3 Lithium MW 6.941">Li
+            </td>
+            <td class="alkaliearth" onclick="ChemElem('Be')" style="BORDER-RIGHT: #3F34FF 2px solid;"
+                title="4 Beryllium MW 9.012182">Be
+            </td>
+            <td colspan="4" style="BORDER-TOP: #3F34FF 2px solid;">&nbsp;
+            </td>
+            <td class="nm" onclick="ChemElem('(')"><b>(</b>
+            </td>
+            <td class="nm" onclick="ChemElem(')')" style="BORDER-RIGHT: #3F34FF 2px solid;"><b>)</b>
+            </td>
+            <td colspan="4" style="BORDER-TOP: #3F34FF 2px solid;">&nbsp;
+            </td>
+            <td class="othernonmetal" onclick="ChemElem('B')" title="5 Boron MW 10.811">B
+            </td>
+            <td class="nonmetal" onclick="ChemElem('C')" title="6 Carbon MW 12.0107">C
+            </td>
+            <td class="nonmetal" onclick="ChemElem('N')" title="7 Nitrogen MW 14.0067">N
+            </td>
+            <td class="nonmetal" onclick="ChemElem('O')" title="8 Oxygen MW 15.9994">O
+            </td>
+            <td class="halogens" onclick="ChemElem('F')" title="9 Fluorine MW 18.9984032">F
+            </td>
+            <td class="noble" onclick="ChemElem('Ne')" style="BORDER-RIGHT: #3F34FF 2px solid;"
+                title="10 Neon MW 20.1797">Ne
+            </td>
+        </tr>
+        <tr>
+            <td class="alkali" onclick="ChemElem('Na')" title="11 Sodium MW 22.98976">Na
+            </td>
+            <td class="alkaliearth" onclick="ChemElem('Mg')" style="BORDER-RIGHT: #3F34FF 2px solid;"
+                title="12 Magnesium MW 24.3050">Mg
+            </td>
+            <td colspan="4" width="128">&nbsp;
+            </td>
+            <td style="BORDER-TOP: #3F34FF 2px solid;BORDER-LEFT: #3F34FF 0px solid;" title="">&nbsp;
+            </td>
+            <td style="BORDER-TOP: #3F34FF 2px solid;BORDER-LEFT: #3F34FF 0px solid;">&nbsp;
+            </td>
+            <td colspan="4" width="128">&nbsp;
+            </td>
+            <td class="transitionmetal" onclick="ChemElem('Al')" title="13 Aluminium MW 26.9815386">Al
+            </td>
+            <td class="othernonmetal" onclick="ChemElem('Si')" title="14 Silicon MW 28.0855">Si
+            </td>
+            <td class="nonmetal" onclick="ChemElem('P')" title="15 Phosphorus MW 30.973762">P
+            </td>
+            <td class="nonmetal" onclick="ChemElem('S')" title="16 Sulfur MW 32.065">S
+            </td>
+            <td class="halogens" onclick="ChemElem('Cl')" title="17 Chlorine MW 35.453">Cl
+            </td>
+            <td class="noble" onclick="ChemElem('Ar')" style="BORDER-RIGHT: #3F34FF 2px solid;"
+                title="18 Argon MW 39.948">Ar
+            </td>
+        </tr>
+        <tr>
+            <td class="alkali" onclick="ChemElem('K')" title="19 Potassium MW 39.0988">K
+            </td>
+            <td class="alkaliearth" onclick="ChemElem('Ca')" title="20 Calcium MW 40.078">Ca
+            </td>
+            <td class="metal" onclick="ChemElem('Sc')" title="21 Scandium MW 44.966912">Sc
+            </td>
+            <td class="metal" onclick="ChemElem('Ti')" title="22 Titanium MW 47.867">Ti
+            </td>
+            <td class="metal" onclick="ChemElem('V')" title="23 Vanadium MW 50.9415">V
+            </td>
+            <td class="metal" onclick="ChemElem('Cr')" title="24 Chromium MW 51.9961">Cr
+            </td>
+            <td class="metal" onclick="ChemElem('Mn')" title="25 Manganese MW 54.938045">Mn
+            </td>
+            <td class="metal" onclick="ChemElem('Fe')" title="26 Iron MW 55.845">Fe
+            </td>
+            <td class="metal" onclick="ChemElem('Co')" title="27 Cobalt MW 58.933195">Co
+            </td>
+            <td class="metal" onclick="ChemElem('Ni')" title="28 Nickel MW 58.6934">Ni
+            </td>
+            <td class="metal" onclick="ChemElem('Cu')" title="29 Copper MW 63.546">Cu
+            </td>
+            <td class="metal" onclick="ChemElem('Zn')" title="30 Zinc MW 65.38">Zn
+            </td>
+            <td class="transitionmetal" onclick="ChemElem('Ga')" title="31 Gallium MW 69.723">Ga
+            </td>
+            <td class="othernonmetal" onclick="ChemElem('Ge')" title="32 Germanium MW 72.64">Ge
+            </td>
+            <td class="othernonmetal" onclick="ChemElem('As')" title="33 Arsenic MW 74.92160">As
+            </td>
+            <td class="nonmetal" onclick="ChemElem('Se')" title="34 Selenium MW 78.96">Se
+            </td>
+            <td class="halogens" onclick="ChemElem('Br')" title="35 Bromine MW 79.904">Br
+            </td>
+            <td class="noble" onclick="ChemElem('Kr')" style="BORDER-RIGHT: #3F34FF 2px solid;"
+                title="36 Krypton MW 83.798">Kr
+            </td>
+        </tr>
+        <tr>
+            <td class="alkali" onclick="ChemElem('Rb')" title="37 Rubidium MW 85.4678">Rb
+            </td>
+            <td class="alkaliearth" onclick="ChemElem('Sr')" title="38 Strontium MW 87.62">Sr
+            </td>
+            <td class="metal" onclick="ChemElem('Y')" title="39 Yttrium MW 88.90585">Y
+            </td>
+            <td class="metal" onclick="ChemElem('Zr')" title="40 Zirconium MW 91.224">Zr
+            </td>
+            <td class="metal" onclick="ChemElem('Nb')" title="41 Niobium MW 92.90638">Nb
+            </td>
+            <td class="metal" onclick="ChemElem('Mo')" title="42 Molybdenum MW 95.96">Mo
+            </td>
+            <td class="metal" onclick="ChemElem('Tc')" title="43 Technetium MW 98">Tc
+            </td>
+            <td class="metal" onclick="ChemElem('Ru')" title="44 Ruthenium MW 101.07">Ru
+            </td>
+            <td class="metal" onclick="ChemElem('Rh')" title="45 Rhodium MW 102.90550">Rh
+            </td>
+            <td class="metal" onclick="ChemElem('Pd')" title="46 Palladium MW 106.42">Pd
+            </td>
+            <td class="metal" onclick="ChemElem('Ag')" title="47 Silver MW 107.8682">Ag
+            </td>
+            <td class="metal" onclick="ChemElem('Cd')" title="48 Cadmium MW 112.411">Cd
+            </td>
+            <td class="transitionmetal" onclick="ChemElem('In')" title="49 Indium MW 114.818">In
+            </td>
+            <td class="transitionmetal" onclick="ChemElem('Sn')" title="50 Tin MW 118.710">Sn
+            </td>
+            <td class="othernonmetal" onclick="ChemElem('Sb')" title="51 Antimony MW 121.760">Sb
+            </td>
+            <td class="othernonmetal" onclick="ChemElem('Te')" title="52 Tellurium MW 127.60">Te
+            </td>
+            <td class="halogens" onclick="ChemElem('I')" title="53 Iodine MW 126.90447">I
+            </td>
+            <td class="noble" onclick="ChemElem('Xe')" style="BORDER-RIGHT: #3F34FF 2px solid;"
+                title="54 Xenon MW 131.293">Xe
+            </td>
+        </tr>
+        <tr>
+            <td class="alkali" onclick="ChemElem('Cs')" title="55 Caesium MW 132.9054">Cs
+            </td>
+            <td class="alkaliearth" onclick="ChemElem('Ba')" title="56 Barium MW 137.327">Ba
+            </td>
+            <td class="nm" title="La-Lu, 15 elements">Las
+            </td>
+            <td class="metal" onclick="ChemElem('Hf')" title="72 Hafnium MW 178.49">Hf
+            </td>
+            <td class="metal" onclick="ChemElem('Ta')" title="73 Tantalum MW 180.94788">Ta
+            </td>
+            <td class="metal" onclick="ChemElem('W')" title="74 Tungsten MW 183.84">W
+            </td>
+            <td class="metal" onclick="ChemElem('Re')" title="75 Rhenium MW 186.207">Re
+            </td>
+            <td class="metal" onclick="ChemElem('Os')" title="76 Osmium MW 190.23">Os
+            </td>
+            <td class="metal" onclick="ChemElem('Ir')" title="77 Iridium MW 192.217">Ir
+            </td>
+            <td class="metal" onclick="ChemElem('Pt')" title="78 Platinum MW 195.084">Pt
+            </td>
+            <td class="metal" onclick="ChemElem('Au')" title="79 Gold MW 196.966569">Au
+            </td>
+            <td class="metal" onclick="ChemElem('Hg')" title="80 Mercury MW 200.59">Hg
+            </td>
+            <td class="transitionmetal" onclick="ChemElem('Tl')" title="81 Thallium MW 204.3833">Tl
+            </td>
+            <td class="transitionmetal" onclick="ChemElem('Pb')" title="82 Lead MW 207.2">Pb
+            </td>
+            <td class="transitionmetal" onclick="ChemElem('Bi')" title="83 Bismuth MW 208.98040">Bi
+            </td>
+            <td class="othernonmetal" onclick="ChemElem('Po')" title="84 Polonium MW (209)">Po
+            </td>
+            <td class="halogens" onclick="ChemElem('At')" title="85 Astatine MW (210)">At
+            </td>
+            <td class="noble" onclick="ChemElem('Rn')" style="BORDER-RIGHT: #3F34FF 2px solid;"
+                title="86 Radon MW (222)">Rn
+            </td>
+        </tr>
+        <tr>
+            <td class="alkali" onclick="ChemElem('Fr')" title="87 Francium MW (223)">Fr
+            </td>
+            <td class="alkaliearth" onclick="ChemElem('Ra')" title="88 Radium MW (226)">Ra
+            </td>
+            <td class="nm" title="Ac-Lr, 15 elements">Acs
+            </td>
+            <td class="metal" onclick="ChemElem('Rf')" title="104 Rutherfordium (267)">Rf
+            </td>
+            <td class="metal" onclick="ChemElem('Db')" title="105 Dubnium MW (268)">Db
+            </td>
+            <td class="metal" onclick="ChemElem('Sg')" title="106 Seaborgium MW (271)">Sg
+            </td>
+            <td class="metal" onclick="ChemElem('Bh')" title="107 Bohrium MW (272)">Bh
+            </td>
+            <td class="metal" onclick="ChemElem('Hs')" title="108 Hassium MW (270)">Hs
+            </td>
+            <td class="metal" onclick="ChemElem('Mt')" title="109 Meitnerium MW (276)">Mt
+            </td>
+            <td class="metal" onclick="ChemElem('Ds')" title="110 Darmstadtium">Ds
+            </td>
+            <td class="metal" onclick="ChemElem('Rg')" title="111 Roentgenium MW (280)">Rg
+            </td>
+            <td class="metal" onclick="ChemElem('Cn')" title="112 Copernicium MW (285)">Cn
+            </td>
+            <td colspan="5" style="BORDER-TOP: #3F34FF 2px solid;BORDER-LEFT: #3F34FF 2px solid;">&nbsp;
+            </td>
+            <td bgcolor="ffffff" style="BORDER-TOP: #3F34FF 2px solid;">&nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td class="nm" colspan="3" width="96">Las
+            </td>
+            <td class="lanthanoids" onclick="ChemElem('La')" title="57 Lanthanum MW 138.90547">La
+            </td>
+            <td class="lanthanoids" onclick="ChemElem('Ce')" title="58 Cerium MW 140.116">Ce
+            </td>
+            <td class="lanthanoids" onclick="ChemElem('Pr')" title="59 Praseodymium MW 140.90765">Pr
+            </td>
+            <td class="lanthanoids" onclick="ChemElem('Nd')" title="60 Neodymium MW 144.242">Nd
+            </td>
+            <td class="lanthanoids" onclick="ChemElem('Pm')" title="61 Promethium MW (145)">Pm
+            </td>
+            <td class="lanthanoids" onclick="ChemElem('Sm')" title="62 Samarium MW 150.36">Sm
+            </td>
+            <td class="lanthanoids" onclick="ChemElem('Eu')" title="63 Europium MW 151.964">Eu
+            </td>
+            <td class="lanthanoids" onclick="ChemElem('Gd')" title="64 Gadolinium MW 157.25">Gd
+            </td>
+            <td class="lanthanoids" onclick="ChemElem('Tb')" title="65 Terbium MW 158.92535">Tb
+            </td>
+            <td class="lanthanoids" onclick="ChemElem('Dy')" title="66 Dysprosium MW 162.500">Dy
+            </td>
+            <td class="lanthanoids" onclick="ChemElem('Ho')" title="67 Holmium MW 164.93032">Ho
+            </td>
+            <td class="lanthanoids" onclick="ChemElem('Er')" title="68 Erbium MW 167.259">Er
+            </td>
+            <td class="lanthanoids" onclick="ChemElem('Tm')" title="69 Thulium MW 168.93421">Tm
+            </td>
+            <td class="lanthanoids" onclick="ChemElem('Yb')" title="70 Ytterbium MW 173.054">Yb
+            </td>
+            <td class="lanthanoids" onclick="ChemElem('Lu')" style="BORDER-RIGHT: #3F34FF 2px solid;"
+                title="71 Lutetium MW 174.668">Lu
+            </td>
+        </tr>
+        <tr>
+            <td class="nm" colspan="3" style="BORDER-BOTTOM: #3F34FF 2px solid;" width="96">Acs
+            </td>
+            <td class="actinoids" onclick="ChemElem('Ac')" title="89 Actinium MW (227)">Ac
+            </td>
+            <td class="actinoids" onclick="ChemElem('Th')" title="90 Thorium MW 232.03806">Th
+            </td>
+            <td class="actinoids" onclick="ChemElem('Pa')" title="91 Protactinium MW 231.03588">Pa
+            </td>
+            <td class="actinoids" onclick="ChemElem('U')" title="92 Uranium MW 238.02891">U
+            </td>
+            <td class="actinoids" onclick="ChemElem('Np')" title="93 Neptunium MW (237)">Np
+            </td>
+            <td class="actinoids" onclick="ChemElem('Pu')" title="94 Plutonium MW (244)">Pu
+            </td>
+            <td class="actinoids" onclick="ChemElem('Am')" title="95 Americium MW (243)">Am
+            </td>
+            <td class="actinoids" onclick="ChemElem('Cm')" title="96 Curium MW (247)">Cm
+            </td>
+            <td class="actinoids" onclick="ChemElem('Bk')" title="97 Berkelium MW (247)">Bk
+            </td>
+            <td class="actinoids" onclick="ChemElem('Cf')" title="98 Californium MW 252">Cf
+            </td>
+            <td class="actinoids" onclick="ChemElem('Es')" title="99 Einsteinium MW (252)">Es
+            </td>
+            <td class="actinoids" onclick="ChemElem('Fm')" title="100 Fermium MW (257)">Fm
+            </td>
+            <td class="actinoids" onclick="ChemElem('Md')" title="101 Mendelevium MW (258)">Md
+            </td>
+            <td class="actinoids" onclick="ChemElem('No')" title="102 Nobelium MW (259)">No
+            </td>
+            <td class="actinoids" onclick="ChemElem('Lr')" style="BORDER-RIGHT: #3F34FF 2px solid;"
+                title="103 Lawrencium MW (262)">Lr
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+</div>
+<form action="/chem/balancer.php" method="post" name="bal">
+    <div class="cmline">
+        <input name="submit1" style="font-size:15px;height:30px" type="submit" value=" Balance ">
+        <input name="submit2" style="font-size:15px;height:30px" type="submit" value=" Check ">
+        <input onclick="clearbal()" style="font-size:15px;height:30px" type="button" value=" Clear ">
+    </div>
+    <font color="green">
+        <div class="msch" style="position:relative;">
+            <input autocomplete="off" id="equtxt" name="equation" onclick="divsuggestout()" onkeyup="searchSuggest()"
+                   type="text" value="">
+            <div class="mschsuggest" id="search_suggest" style="position:rlative;z-index:100;"></div>
+        </div>
+    </font></form>
+</body>

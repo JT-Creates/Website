@@ -1,0 +1,31 @@
+#include <iostream>
+using namespace std;
+int main(){
+    int code = rand() % 9999; //sets the user passcode
+    int iphone;
+    string access="no";
+    cout<<"Enter the 4 digit passcode.";
+    for(int a=0;a<10;a++){
+        cin>>iphone;
+        if(iphone==code){
+            goto success;
+        }else{
+            goto Fail;
+        }
+        success:
+        access="yes";
+            break;
+        Fail:
+        if(code<iphone){
+            cout<<"The passcode is less than " <<iphone<<endl;
+        }else{
+            cout<<iphone<<" is less than the passcode."<<endl;
+        }
+        access="no";
+    }
+    if(access=="yes"){
+        cout<<"your in";
+    }else{
+        cout<<"out of trys";
+    }
+}

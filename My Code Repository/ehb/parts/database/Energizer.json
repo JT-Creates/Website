@@ -1,0 +1,27 @@
+{
+	"6c0eea6d5c8c6965c9a2443a5c993f9b8d80dc7a" : [
+		{"uid": "6c0eea6d5c8c6965c9a2443a5c993f9b8d80dc7a"},
+		{"date" : "04-06-21 : 07.06.23.839187"},
+		{"ynam" : "JT Stevens"},
+		{"nam" : "Energizer AAA"},
+		{"pn" : "E92"},
+		{"mf" : "Energizer"},
+		{"cat" : "Battery"},
+		{"sum" : "1.5 volt ENERGIZER AAA battery"},
+		{"inf" : "Classification: Alkaline Chemical System: Zinc-Manganese Dioxide (Zn/MnO2 ) Designation: ANSI-24A, IEC-LR03 Nominal Voltage: 1.5 volts Nominal IR: 150 to 300 milliohms (fresh) Operating Temp: -18°C to 55°C (0°F to 130°F) Typical Weight: 11.5 grams (0.4 oz.) Typical Volume: 3.8 cubic centimeters (0.2 cubic inch) Jacket: Plastic Label Shelf Life: 10 years at 21°C"},
+		{"link" : "https://data.energizer.com/pdfs/e92.pdf"}
+	]
+,
+	"9499ba493893f6f10c72f7b2bb80a4ba9f79abf9" : [
+		{"uid": "9499ba493893f6f10c72f7b2bb80a4ba9f79abf9"},
+		{"date" : "04-06-21 : 07.06.22.860191"},
+		{"ynam" : "JT Stevens"},
+		{"nam" : "Energizer AA"},
+		{"pn" : "E91"},
+		{"mf" : "Energizer"},
+		{"cat" : "Battery"},
+		{"sum" : "1.5 volt ENERGIZER AA battery"},
+		{"inf" : "Classification: Alkaline Chemical System: Zinc-Manganese Dioxide (Zn/MnO2 ) Designation: ANSI-15A, IEC-LR6 Nominal Voltage: 1.5 volts Nominal IR: 150 to 300 milliohms (fresh) Operating Temp: -18°C to 55°C (0°F to 130°F) Typical Weight: 23.0 grams (0.8 oz.) Typical Volume: 8.1 cubic centimeters (0.5 cubic inch) Jacket: Plastic Label Shelf Life: 10 years at 21°C Terminal: Flat Contact"},
+		{"link" : "https://data.energizer.com/pdfs/e91.pdf"}
+	]
+}

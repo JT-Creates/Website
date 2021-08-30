@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head><title>Canvas code example</title>
+<script type="text/javascript" src="https://pagecdn.io/lib/mathjs/7.1.0/math.min.js"></script>
+<script type="text/javascript">
+// JavaScript source code goes here
+function start(){
+//alert("hi");
+new draw.reset();
+new draw.clear();
+new draw.initialtion();
+}
+function fun1(x) {var hello = 6*Math.exp(x); //alert(hello);
+ return hello;            }
+function fun2(x) {var hello1 = Math.pow((Math.tan((Math.cos(6/x)*Math.cos(2*Math.cos((x/Math.PI)))))),Math.sin(x)); //alert(hello1);
+ return hello1;            }
+function fun3(x) {return Math.sqrt(x); }
+function fun4(x) {return 3; }
+var draw = {
+ ctx_ws : ctx_ws = 90, //function() {return ctx_ws;},
+ ctx_hs : ctx_hs = 40, //function() {return ctx_hs;},
+ x_shift : x_shift = 0.5, //function() {return x_shift;},
+ y_shift : y_shift = 0.5, //function() {return y_shift;},
+ N_mode : N_mode = true, //function() {return N_mode;},
+ reset : function(){
+  this.ctx_ws = 90;
+  this.ctx_hs = 40;
+  this.x_shift = 0.5;
+  this.y_shift = 0.5;
+  this.N_mode = true;
+ },
+ clear : function(){
+  var canvas = document.getElementById("canvas");
+  if (null==canvas || !canvas.getContext) return;
+  var axes={}, ctx = canvas.getContext("2d");
+  ctx.fillStyle = "rgb(255, 255, 255)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+ },
+ initialtion : function(){
+  var canvas = document.getElementById("canvas");
+  if (null==canvas || !canvas.getContext) return;
+  var axes={}, ctx = canvas.getContext("2d");
+  ctx.fillStyle = "rgb(255, 255, 255)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  axes.x0 = .5 + this.x_shift*canvas.width;  // x0 pixels from left to x=0
+  axes.y0 = .5 + this.y_shift*canvas.height; // y0 pixels from top to y=0
+  axes.scalex = this.ctx_ws;             // 40 pixels from x=0 to x=1
+  axes.scaley = this.ctx_hs;             // 40 pixels from x=0 to x=1
+  axes.scalem = axes.scalex / 3;
+  axes.doNegativeX = this.N_mode;
+  showAxes(ctx,axes);
+  funGraph(ctx,axes,fun1,"rgb(11,153,11)",1,"f(x) = 6*sin(x)", axes.scaley, 15); 
+  funGraph(ctx,axes,fun2,"rgb(66,44,255)",1,"f(x) = 6*cos(2x)", axes.scaley, 30);
+  return;
+ },
+ plot_me : function() {
+  var canvas = document.getElementById("canvas");
+  if (null==canvas || !canvas.getContext) return;
+  var axes={}, ctx = canvas.getContext("2d");
+  axes.x0 = .5 + this.x_shift*canvas.width;  // x0 pixels from left to x=0
+  axes.y0 = .5 + this.y_shift*canvas.height; // y0 pixels from top to y=0
+  axes.scalex = this.ctx_ws;             // 40 pixels from x=0 to x=1
+  axes.scaley = this.ctx_hs;             // 40 pixels from x=0 to x=1
+  axes.doNegativeX = this.N_mode;
+  funGraph(ctx,axes,function(x){return eval(document.getElementById("val_1").value);},"rgb(166,144,100)",1,"f(x) = x^x", axes.scaley, 60);
+  return;
+ }
+}
+
+function funGraph(ctx,axes,func,color,thick,text_str,xtext,ytext) {
+ var xx, yy, dx=0.1, x0=axes.x0, y0=axes.y0, scale=axes.scalex;
+ var iMax = Math.round((ctx.canvas.width-x0)/dx);
+ var iMin = axes.doNegativeX ? Math.round(-x0/dx) : 0;
+ ctx.beginPath();
+ ctx.lineWidth = 0.8;
+ ctx.strokeStyle = color;
+ for (var i=iMin;i<=iMax;i+=dx) {
+  xx = dx*i; yy = axes.scaley*func(xx/axes.scalex);
+  if (i==iMin) ctx.moveTo(x0+xx,y0-yy);
+  else         ctx.lineTo(x0+xx,y0-yy);
+ }
+ ctx.stroke();
+ ctx.fillStyle = color;
+ ctx.font = "12px Arial";
+ ctx.textAlign = "left";
+ ctx.fillText(text_str, xtext, ytext);
+}
+
+function showAxes(ctx,axes) {
+ var x0=axes.x0, w=ctx.canvas.width;
+ var y0=axes.y0, h=ctx.canvas.height;
+ var xmin = axes.doNegativeX ? 0 : x0;
+ var cscalev= (y0 + x0)/axes.scalem;
+ ctx.beginPath();
+ ctx.strokeStyle = "rgb(180,180,180)"; 
+ for(var mx = x0; mx <= w; mx += axes.scalex){
+  ctx.moveTo(mx,y0+4); ctx.lineTo(mx,y0-4);  // X axis
+  for(var nx = mx; nx <= mx + axes.scalex; nx += axes.scalem){
+   ctx.moveTo(nx,y0-2); ctx.lineTo(nx,y0+2);  // X axis
+  };
+  ctx.fillStyle = "rgb(100,200,200)";
+  ctx.font = "9px Arial";
+  ctx.textAlign = "center";
+  ctx.fillText(Math.round(((((mx)/axes.scalex)-(1/(2*axes.scalex)+1))),16), x0+mx-axes.scalex/2, y0-8);
+ };
+ for(var my = y0; my >= -h; my -= axes.scaley){ 
+  ctx.moveTo(x0-4,my);    ctx.lineTo(x0+4,my);  // Y axis
+  for(var ny = my; ny >= my - axes.scaley; ny -= axes.scalem){
+   ctx.moveTo(x0-2,ny);    ctx.lineTo(x0-2,ny);  // Y axis
+  };
+  ctx.fillStyle = "rgb(100,200,200)";
+  ctx.font = "9px Arial";
+  ctx.textAlign = "left";
+  ctx.fillText(Math.round(-((((my)/axes.scaley)-(1/(2*axes.scaley)))),32), x0+8, y0+my);
+ };
+ for(var mx = x0; mx >= -w; mx -= axes.scalex){
+  ctx.moveTo(mx,y0+4); ctx.lineTo(mx,y0-4);  // X axis
+  for(var nx = mx; nx >= mx - axes.scalex; nx -= axes.scalem){
+   ctx.moveTo(nx,y0-2); ctx.lineTo(nx,y0+2);  // X axis
+  };
+  ctx.fillStyle = "rgb(100,200,200)";
+  ctx.font = "9px Arial";
+  ctx.textAlign = "center";
+  ctx.fillText(Math.round(((((mx)/axes.scalex)-(1/(2*axes.scalex)+1))),32), x0+mx-axes.scalex/2, y0-8);
+ };
+ for(var my = y0; my <= h; my += axes.scaley){ 
+  ctx.moveTo(x0-4,my);    ctx.lineTo(x0+4,my);  // Y axis
+  for(var ny = my; ny <= my + axes.scaley; ny += axes.scalem){
+   ctx.moveTo(x0-2,ny);    ctx.lineTo(x0-2,ny);  // Y axis
+  };
+ };
+ ctx.strokeStyle = "rgb(128,128,128)"; 
+ ctx.moveTo(xmin,y0); ctx.lineTo(w,y0);  // X axis
+ ctx.moveTo(x0,0);    ctx.lineTo(x0,h);  // Y axis
+ ctx.stroke();
+}
+</script>
+
+<script type="text/javascript">
+function Dec2Frac(f) {
+   var df, Dec2Frac, lUpperPart = 1, lLowerPart = 1;
+   
+   df = lUpperPart / lLowerPart;
+   while (df != (((f*10) - f)/9)) {
+      if (df < (((f*10) - f)/9)) {
+         lUpperPart = lUpperPart + 1;
+      } else {
+         lLowerPart = lLowerPart + 1;
+         lUpperPart = (((f*10) - f)/9) * lLowerPart;
+      };
+      df = lUpperPart / lLowerPart;
+   };
+if (lLowerPart = 1) {
+Dec2Frac = (fix( 10*lUpperPart-lUpperPart, 9 )) + "/" + ( fix( 10*lLowerPart-lLowerPart,9));
+} else {
+//Dec2Frac = "<sup>" + (fix( 10*lUpperPart-lUpperPart, 9 )) + "</sup>/<sub>" + (fix(10*lLowerPart-lLowerPart,9)) + "</sub>";
+Dec2Frac = "(" + (fix( 10*lUpperPart-lUpperPart, 9 )) + "/" + ( fix( 10*lLowerPart-lLowerPart,9)) + ")";
+};
+return Dec2Frac;
+}
+
+function fix(f1, f2) {
+   var df, fix, lUpperPart = 1, lLowerPart = 1;
+   
+   //lUpperPart = 1 //(10*(f1/f2)-(f1/f2));
+   //lLowerPart = 1 //9;
+   
+   df = lUpperPart / lLowerPart;
+   while (df < (f1/f2)){
+      if (lUpperPart < f1) {
+         lUpperPart = lUpperPart + 1;
+      } else {
+         lLowerPart = lLowerPart + 1;
+         lUpperPart = f1 * lLowerPart;
+      };
+      df = lUpperPart / lLowerPart;
+   };
+if (lLowerPart = 1) {
+ fix = (lUpperPart);
+} else {
+ fix = ((lUpperPart)) + "/" + (lLowerPart);
+};
+return fix;
+}
+
+function fractionize(f) {
+ var fractionize = ((f*10) - f)/9;
+ return fractionize;
+}
+
+function getfrac(m_set, f) {
+   var df, getfrac, lUpperPart = 1, lLowerPart = 1;
+
+   df = lUpperPart / lLowerPart;
+   while (df != (((f*10) - f)/9)) {
+      if (df < (((f*10) - f)/9)) {
+         lUpperPart = lUpperPart + 1;
+      } else {
+         lLowerPart = lLowerPart + 1;
+         lUpperPart = (((f*10) - f)/9) * lLowerPart;
+      };
+      df = lUpperPart / lLowerPart;
+   };
+if (m_set = 1) {
+//if (lLowerPart != 1) {
+getfrac = lLowerPart;
+//};
+} else {
+getfrac = lUpperPart;
+//getfrac = fix(lUpperPart-lUpperPart, 9 );
+};
+return getfrac;
+}
+</script>
+</head>
+<body onload="start()">
+<div onchange="draw.initialtion();">
+<ul>
+<li>
+<input type="number" id="scalex" onchange="draw.ctx_ws = parseFloat(document.getElementById('scalex').value); " step="0.1" min=0.1 oninput="validity.valid||(value='');" value="90"></input>
+</li><li>
+<input type="number" id="scaley" onchange="draw.ctx_hs = parseFloat(document.getElementById('scaley').value); " step="0.1" min=0.01 oninput="validity.valid||(value='');" value="40"></input>
+</li><li>
+<input type="number" id="shiftx" onchange="draw.x_shift = parseFloat(document.getElementById('shiftx').value); " step="0.001" value="0.5"></input>
+</li><li>
+<input type="number" id="shifty" onchange="draw.y_shift = parseFloat(document.getElementById('shifty').value); " step="0.001" value="0.5"></input>
+</li></ul>
+<ul><li>
+<input id="val_0" type="text" placeholder="color"></input>
+</li><li>
+<input id="val_1" type="text" placeholder="function"></input>
+</li><li>
+<button id="name" oninput="draw.plot_me()">submit</button>
+</li></ul>
+<canvas id="canvas" width="600" height="600" style="background-color:white;"></canvas>
+</body>
+</html>

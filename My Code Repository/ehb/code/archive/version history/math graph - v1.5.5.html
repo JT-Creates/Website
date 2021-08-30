@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="./style/main.css"/>
+<title>Graph</title>
+<script type="text/javascript" src="https://pagecdn.io/lib/mathjs/7.1.0/math.min.js"></script>
+<script type="text/javascript" src="./js/mat_module_lib.js"></script>
+<script type="text/javascript" src="./js/mat_graph_lib.js"></script>
+<script type="text/javascript">
+function start(st){
+var obj = draw;
+obj.clear();
+obj.refresh_ctx();
+eval(st);
+}
+function fbns(x) {var hello3 = 1;
+var i;
+var fib = []; // Initialize array!
+fib[0] = 0;
+fib[1] = 1;
+for (var i = 2; i <= 10; i++) {
+  // Next fibonacci number = previous + one before previous
+  // Translated to JavaScript:
+  fib[i] = fib[i - 2] + fib[i - 1];
+  console.log(fib[i]);
+};
+return fib[x];}
+
+
+</script>
+</head>
+<body onload="start('textswitch = document.getElementById(&quot;btn_r&quot;);obj.reset();obj.clear();obj.refresh_ctx();obj.initialize();elementsadd();')">
+<div class="left_pane">
+<div onchange="start('var btncr = document.getElementById(&quot;btn_r&quot;); if(btncr.value == &quot;Demo&quot;){obj.initialize();}else{obj.plot_me();};')">
+<ul>
+<li>
+<input type="text" id="scalex" onchange="draw.ctx_ws = eval(document.getElementById('scalex').value); " min=0.1 onchange="validity.valid||(value='1');" placeholder="x-scale"></input>
+</li><li>
+<input type="text" id="scaley" onchange="draw.ctx_hs = eval(document.getElementById('scaley').value); " min=0.01 onchange="validity.valid||(value='1');" placeholder="y-scale"></input>
+</li><li>
+<input type="number" id="shiftx" onchange="draw.x_shift = parseFloat(document.getElementById('shiftx').value); " step="0.001" placeholder="horisontal shift"></input>
+</li><li>
+<input type="number" id="shifty" onchange="draw.y_shift = parseFloat(document.getElementById('shifty').value); " step="0.001" placeholder="vertical shift"></input>
+</li></ul>
+<button id="btn_c" onclick="start()">clear</button>
+<button id="btn_r" onclick="changer('Graph','Demo');start('var btncr = document.getElementById(&quot;btn_r&quot;); if(btncr.value == &quot;Demo&quot;){obj.initialize();}else{obj.plot_me();};')" value="Demo">Demo</button>
+<button id="name" onclick="elementsadd()">add</button>
+</div>
+<ol id="els">
+</ol>
+</div>
+<div class="right_pane">
+<canvas id="canvas" width="600" height="600" style="background-color:white;"></canvas>
+</div>
+</body>
+</html>
