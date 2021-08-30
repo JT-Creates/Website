@@ -10,6 +10,7 @@
 div, button, input, span, canvas, p, body {
  border-radius: 4px;
  position: relative;
+ list-style: none;
 }
 
 button, input {
@@ -45,24 +46,6 @@ width: 100%;
 height: 100%;
 object-fit: fill;
 }
-
-#thumb {
-width: 320pt;
-height: 180pt;
-object-fit: fill;
-}
-
-.icon {
-width: 20pt;
-height: 20pt;
-object-fit: fill;
-}
-
-
-li {
-    list-style: none;
-}
-
 a {
     color: #008061;
     text-decoration: none;
@@ -79,19 +62,16 @@ footer {
     padding-top: auto;
     background: #ccc;
 }
-
-#main_container {
- display: grid;
- width: 100%;
- height: 100%;
- grid-template-columns: 1fr;
- grid-template-rows: 4em auto;
- grid-gap: 0;
- grid-template-areas: 
- "Top_bar"
- "Content_pane";
+nav {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: left;
+    background: orange;
+    display: grid;
+    grid-template-columns: repeat(minmax(120px, 400px));
+    grid-template-areas:
+        "tab0 tab1 tab2 tab3 tab4 tab5";
 }
-
 #rightPane {
     grid-area: right_panel;
     text-align: left;
@@ -100,7 +80,26 @@ footer {
     padding: 0.5em;
     background-color: silver;
 }
-
+li {
+    list-style: none;
+}
+.level-1, li>button.level-2 {
+    vertical-align: top;
+    margin: 1px;
+    background: #fff;
+    text-align: center;
+    height: 20pt;
+    border: 0px transparent;
+    border-bottom: 2pt solid orange;
+}
+li>button.level-2:hover, .level-1:hover {
+    color: #ff8fae;
+    cursor: pointer;
+    background: #000;
+}
+#nio {
+    display: none;
+}
 #backplane {
     box-shadow: 1px -3px 5px rgba(0,0,2,2);
     -khtml-box-shadow: 1px -3px 5px rgba(0,0,2,2);
@@ -131,9 +130,39 @@ footer {
  background-color: #ededed;
 }
 
+#main_container {
+ display: grid;
+ width: 100%;
+ height: 100%;
+ grid-template-columns: 1fr;
+ grid-template-rows: 4em auto;
+ grid-gap: 0;
+ grid-template-areas: 
+ "Top_bar"
+ "Content_pane";
+}
+
 #pt, #contents, #entrance_image{
  grid-area: Content_pane;
  width: 100%;
+}
+#Top_panel {
+ grid-area: Top_bar;
+ display: grid;
+ width: 100%;
+ height: 100%;
+ grid-template-columns: auto 1fr;
+ grid-template-rows: 1fr 1fr;
+ grid-gap: 0;
+ grid-template-areas: 
+ "Logo_top Info_top"
+ "Logo_top Navagation_top";
+}
+#Logo_top {
+ grid-area: Logo_top;
+}
+#Nav_top {
+ grid-area: Navagation_top;
 }
 #els {
  grid-area: functions_panel;
@@ -150,45 +179,6 @@ height: 46vw;
 #entrance_image {
 display: inline;
 }
-
-// ============ Navigation ============
-
-#Logo_top {
- grid-area: logo_top;
-}
-
-#Info_top {
- grid-area: inf_top
-}
-
-#Social_top {
- grid-area: social_top
-}
-#Navagation_top {
- grid-area: nav_top;
- display: grid;
- margin-top: 10px;
- margin-bottom: 10px;
- text-align: left;
- background: orange;
- grid-template-columns: repeat(minmax(120px, 400px));
- grid-template-areas:
-  "tab0 tab1 tab2 tab3 tab4 tab5";
-}
-
-#Top_panel {
- grid-area: Top_bar;
- display: grid;
- width: 100%;
- height: 100%;
- grid-template-columns: auto repeat(1fr);
- grid-template-rows: repeat(1em);
- grid-gap: 0;
- grid-template-areas: 
- "logo_top inf_top social_top menu_io"
- "logo_top nav_top nav_top nav_top";
-}
-
 #expand_Programs {
 position: absolute;
  background-color: white;
@@ -211,22 +201,6 @@ align-items: left;
         "tabc tabd tabe tabf";
 }
 
-.level-1, li>button.level-2 {
-    vertical-align: top;
-    margin: 1px;
-    background: #fff;
-    text-align: center;
-    height: 20pt;
-    border: 0px transparent;
-    border-bottom: 2pt solid orange;
-}
-li>button.level-2:hover, .level-1:hover {
-    color: #ff8fae;
-    cursor: pointer;
-    background: #000;
-}
-
-
 li>.level-2 {
 display: inline;
 width: 100%;
@@ -238,4 +212,9 @@ display: inline-block;
 padding: 4pt;
 margin: 4pt 0 4pt 0;
 width: 100%;
+}
+#thumb {
+width: 360px;
+height: 200px;
+object-fit: fill;
 }

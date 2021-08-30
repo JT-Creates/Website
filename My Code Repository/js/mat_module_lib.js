@@ -35,30 +35,18 @@ function elementsadd(){
  elol.innerHTML = itms;
 }
 
-
-function resize(elem1, elem2, mode) {
-    var element = elById(elem1);
-    c_width = elById(elem2).clientWidth;
-    if(mode == 1){
-        if(element.clientWidth > c_width + 8) element.style.width = element.clientWidth + 1;
-        else if(element.clientWidth < c_width - 8) element.style.width = element.clientWidth - 1;
-    }
-    else if (mode == 2) {
-        element.style.height = elById("main_container").clientHeight - 1;
-    }
-    else {
-        if(element.clientWidth > c_width + 2) element.style.width = element.clientWidth + 1;
-        else if(element.clientWidth < c_width - 2) element.style.width = element.clientWidth - 1;
-        element.style.height = elById("main_container").clientHeight - 1;
-    }
-    console.log(element.style.width);
-}
-
-function changer(text1,text2) {
+function changer(text1,text2,data1,data2,action1,action2) {
  var t = text1;
- if(t_sw.value == text1) t = text2;
+ var d = data1;
+ var a = action1;
+ if(t_sw.value == text1) {
+  t = text2;
+  d = data2;
+  a = action2;
+ }
  t_sw.value = t;
- t_sw.innerHTML = t;
+ t_sw.innerHTML = t + d;
+ eval(a);
 }
 
 function dragElement(elmnt, elmnt2, x_loc, y_loc, dw_eval, move_eval, up_eval) {
