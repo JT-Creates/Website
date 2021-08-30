@@ -1,9 +1,38 @@
-<HTML>
+<?encoding utf-8?>
+<!DOCTYPE html>
+<html encoding="utf-8">
 <head>
+<script type="text/javascript" src="../../js/jquery.js" encoding="utf-8"></script>
+<script type="text/javascript" src="../../js/js_module_lib.js" encoding="utf-8"></script>
+<script type="text/javascript" src="../../js/mat_graph_lib.js" encoding="utf-8"></script>
+<script type="text/javascript" src="../../js/math.js" encoding="utf-8"></script>
+<script type="text/javascript">
+var obj = draw, real_Height = 0, s_Height = 0, cevents = [3], cactions = ["elById(\"l1\").setAttributesNS(null,\"y1\", elById(\"l1\").getAttributeNS(null,\"y1\")+1);","elById(\"l1\").setAttributesNS(null,\"x1\", elById(\"l1\").getAttributeNS(null,\"x1\")+1);"];
+var dynamic  = "s_Height = elById('main_container').clientHeight + 1;";
+    //dynamic += "if(real_Height < s_Height - 1 || real_Height > s_Height + 1) Document.getElementById(\"carrot\").style.height = Document.getElementById(\"ei\").clientWidth/2;";
+    //dynamic += "real_Height = elById(\"main_container\").clientHeight;";
+    //dynamic += "elById(\"l1\").attributes.x1 += 1;";
+
+function start() {
+startInterval()
+//Slideshow();
+//changer('nav_menu_io','open','close','<img class=\'icon\' src=\'thumbs/i (5).jpg\'>','<img class=\'icon\' src=\'thumbs/i (11).jpg\'>','document.getElementById(\'Nav_top\').style.display=\'block\'','document.getElementById(\'Nav_top\').style.display=\'none\'');
+}
+</script>
 </head>
-<body>
-<svg>
-<line point="23,32,21,32"></line>
+<body onload="start();startInterval();">
+<div id="main_container">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 350 105.1" style="enable-background:new 0 0 350 105.1;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#E60000;}
+	.st1{fill:#231F20;}
+	.st2{fill:none;stroke:#E60000;stroke-width:0.714;stroke-miterlimit:10;}
+</style>
+<line id="l1" class="st2" x1="15.3" y1="36.6" x2="70.2" y2="36.6"/>
+<line id="l2" class="st2" x1="70.2" y1="36.6" x2="70.2" y2="0"/>
+<script>
+</script>
 </svg>
+</div>
 </body>
 </html>
